@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AVLTree_test.cpp" />
     <ClCompile Include="gtest-all.cc" />
     <ClCompile Include="TArrayHash_test.cpp" />
     <ClCompile Include="test_main.cpp" />

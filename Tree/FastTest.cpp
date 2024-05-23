@@ -33,7 +33,7 @@ int main()
 	tree.Reset();
 
 	std::cout<<tree.GetCurrentRecord().key;
-	std::cout << tree;
+	//std::cout << tree;
 	//std::cout <<"sct" << std::endl << sct;
 	
 	//std::cout << "st1 after"<<std::endl << st1;
