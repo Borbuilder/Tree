@@ -1,42 +1,46 @@
-#include<iostream>
-#include<string>
-#include<iomanip>
-#include "TSortTable.h"
-#include "TTreeTable.h"
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 
+// Генерация случайного полинома степени n
+std::vector<int> generateRandomPolynomial(int n) {
+    std::vector<int> polynomial(n + 1); // Вектор для хранения коэффициентов полинома
 
-int main()
-{
-	TTreeTable tree;
+    // Генерация случайных коэффициентов
+    for (int i = 0; i <= n; i++) {
+        polynomial[i] = std::rand() % 10; // Генерация случайного коэффициента от 0 до 9
+    }
 
-	TRecord rec4(4, "test4");
-	tree.Insert(rec4);
+    return polynomial;
+}
+std::vector<int> generateRandomPolynomial(int n) {
+    std::vector<int> degrees(n + 1); // Вектор для хранения коэффициентов полинома
 
-	TRecord rec3(3, "test3");
-	tree.Insert(rec3);
+    // Генерация случайных коэффициентов
+    for (int i = 0; i <= n; i++) {
+        degrees[i] = std::rand() % 10; // Генерация случайного коэффициента от 0 до 9
+    }
 
-	TRecord rec2(2, "test2");
-	tree.Insert(rec2);
+    return degrees;
+}
 
-	TRecord rec5(5, "test5");
-	tree.Insert(rec5);
+int main() {
+    // Устанавливаем случайное начальное значение
+    std::srand(std::time(nullptr));
 
-	TRecord rec6(6, "test6");
-	tree.Insert(rec6);
+    int degree = 3; // Степень полинома
+    std::vector<int> randomPolynomial = generateRandomPolynomial(degree);
 
-	TRecord rec7(7, "test7");
-	tree.Insert(rec7);
-	tree.Reset();
+    // Вывод сгенерированного полинома
+    std::cout << "Сгенерированный полином степени " << degree << ": ";
+    for (int i = 0; i <= degree; i++) {
+        std::cout << randomPolynomial[i] << "x^" << i;
+        if (i < degree) {
+            std::cout << " + ";
+        }
+    }
+    std::cout << std::endl;
 
-	TRecord rec1(1, "test7");
-	tree.Insert(rec1);
-	tree.Reset();
-
-	std::cout<<tree.GetCurrentRecord().key;
-	//std::cout << tree;
-	//std::cout <<"sct" << std::endl << sct;
-	
-	//std::cout << "st1 after"<<std::endl << st1;
-	
-	
+    return 0;
 }

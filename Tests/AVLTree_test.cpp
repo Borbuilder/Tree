@@ -258,3 +258,14 @@ TEST(AVLTree, can_delete_root)
 	EXPECT_EQ(70, tree.GetRightKey(60));
 	EXPECT_EQ(-1, tree.GetLeftKey(60));
 }
+
+TEST(AVLTree, can)
+{
+	AVLTree tree;
+	for (int i = 0; i < 100; i++) {
+		std::string str = "name" + std::to_string(i);
+		TRecord rec(i, str);
+		tree.Insert(rec);
+	}
+
+}
