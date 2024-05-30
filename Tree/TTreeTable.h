@@ -39,6 +39,7 @@ public:
 		pCurr = nullptr;
 		pPrev = nullptr;
 		countpos = 0; lvl = 0;
+		dataCount = 0;
 	}
 
 	bool Find(TKey key)
@@ -102,6 +103,7 @@ public:
 				}
 			}
 			dataCount++;
+			efficiency++;
 			return true;
 		}
 	}

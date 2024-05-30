@@ -41,7 +41,7 @@ public:
 	}
 	bool IsEnd()
 	{
-		if (Curr_pos == size)
+		if (Curr_pos == dataCount)
 		{
 			return true;
 		}

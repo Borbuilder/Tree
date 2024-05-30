@@ -24,6 +24,7 @@ protected:
 				pNode->bal = BalOK;
 				pNode = p1;
 				pNode->bal = BalOK;
+				//p1 = pNode->pLeft;
 			}
 			else
 			{
@@ -266,6 +267,7 @@ public:
 		}
 		else {
 			InsBalTree(pRoot, rec);
+			return true;
 		}
 	}
 	bool Delete(TKey key)

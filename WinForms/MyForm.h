@@ -34,7 +34,7 @@ std::string generateRandomString(int length)
 	std::string randomString;
 
 	// Устанавливаем seed для генератора случайных чисел
-	std::srand(time(0));
+	//std::srand(time(0));
 
 	for (int i = 0; i < length; i++) {
 		randomString += charset[std::rand() % charset.length()];
@@ -42,24 +42,13 @@ std::string generateRandomString(int length)
 
 	return randomString;
 }
-TRecord generateRecord(std::vector<int> &vec,const int keys_width) 
+TRecord generateRecord(const int keys_width) 
 {
 	std::string value = generateRandomString(7);
 	int key;
 
-	srand(time(0));
+	//srand(time(0));
 	key = rand() % keys_width;
-	/*if (vec.size() != 0)
-	{
-		for (int i = 0; i < vec.size(); i++) {
-			if (key == vec[i]) {
-				while (key == vec[i]) {
-					srand(time(0));
-					key = rand() % keys_width;
-				}
-			}
-		}
-	}*/
 	TRecord record(key, value);
 	return record;
 }
@@ -329,6 +318,7 @@ namespace WinForms {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(55, 20);
 			this->textBox3->TabIndex = 6;
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
 			// 
 			// label3
 			// 
@@ -395,6 +385,7 @@ namespace WinForms {
 			this->button3->TabIndex = 12;
 			this->button3->Text = L"Найти";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// button4
 			// 
@@ -498,7 +489,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
     std::string input_str2;
 	input_str2 = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	keys_width = atoi(input_str2.c_str());
-
+    srand(time(0));
 
 	//Неупорядоченная таблица
 	if (radioButton1->Checked)
@@ -506,15 +497,14 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		//std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			std::string value = generateRandomString(7);
+			std::string value = "name" + std::to_string(i);//= generateRandomString(7);
 			int key;
 
-			srand(time(0));
 			key = rand() % keys_width;
-			TRecord record(key, value);
+			//TRecord record(key, value);
 			//return record;
 
-			//TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			//push_back(record.key);
 
 			bool is_insert = scan_table.Insert(record);
@@ -527,7 +517,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::string str=std::to_string(eff); 
 		String^ strange_str = gcnew String(str.c_str());
 		label7->Text = strange_str;
-		scan_table.ClearEfficiency();
+		//scan_table.ClearEfficiency();
 		flag_scan = 1;
 	}
 	
@@ -537,7 +527,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			keys.push_back(record.key);
 
 			bool is_insert = sort_table.Insert(record);
@@ -560,10 +550,13 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			keys.push_back(record.key);
 
-			array_hash.Insert(record);
+			bool is_insert = array_hash.Insert(record);
+			if (is_insert == false) {
+				i--;
+			}
 		}
 
 		int eff = array_hash.GetEfficiency();
@@ -580,10 +573,13 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			keys.push_back(record.key);
 
-			list_hash.Insert(record);
+			bool is_insert = list_hash.Insert(record);
+			if (is_insert == false) {
+				i--;
+			}
 		}
 
 		int eff = list_hash.GetEfficiency();
@@ -600,10 +596,13 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			keys.push_back(record.key);
 
-			tree_table.Insert(record);
+			bool is_insert = tree_table.Insert(record);
+			if (is_insert == false) {
+				i--;
+			}
 		}
 
 		int eff = tree_table.GetEfficiency();
@@ -620,10 +619,13 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		std::vector<int> keys;
 		for (int i = 0; i < records_number; i++)
 		{
-			TRecord record = generateRecord(keys, keys_width);
+			TRecord record = generateRecord(keys_width);
 			keys.push_back(record.key);
 
-			avl_tree.Insert(record);
+			bool is_insert = avl_tree.Insert(record);
+			if (is_insert == false) {
+				i--;
+			}
 		}
 
 		int eff = avl_tree.GetEfficiency();
@@ -686,7 +688,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	if (flag_avl == 1) {
 		int i = 0;
-		for (avl_tree.Reset(); !avl_tree.IsEnd(); avl_tree.GoNext())
+		for (avl_tree.Reset(); i<avl_tree.GetDataCount(); avl_tree.GoNext())
 		{
 
 			Table->Rows[i]->Cells[0]->Value = gcnew String(std::to_string(avl_tree.GetCurrentRecord().key).c_str());
@@ -694,6 +696,11 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 			i++;
 		}
 	}
+}
+private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 }
 };
 
