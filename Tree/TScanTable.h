@@ -5,7 +5,7 @@ class TScanTable:public TArrayTable
 {
 public:
 	TScanTable(int _size = MAX_SIZE) : TArrayTable(_size) {};
-
+	//~TScanTable() : ~TArrayTable(_size) {};
 	bool Find(TKey key) override;
 	bool Insert(TRecord record) override;
 	bool Delete(TKey key) override;

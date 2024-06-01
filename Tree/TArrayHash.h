@@ -24,16 +24,37 @@ public:
 		{
 			pRecs[i] = Empty;
 		}
+		dataCount = 0;
+	}
+
+	TArrayHash& operator =(const TArrayHash& other)
+	{
+		delete[] pRecs;
+		size = other.size;
+		step = other.step;
+		pRecs = new TRecord[size];
+		Empty.key = other.Empty.key;
+		Del.key = other.Del.key;
+		Curr_pos = other.Curr_pos;
+		for (int i = 0; i < size; i++)
+		{
+			pRecs[i] = Empty;
+		}
+		dataCount =other.dataCount;
+		return *this;
 	}
 	~TArrayHash()
 	{
 		delete[] pRecs;
+		Empty.key = -1;
+		Del.key = -2;
+		Curr_pos = -1;
+		dataCount = 0;
 	}
 
 	void Reset()
 	{
-		int Curr_pos = 0;
-		for (; Curr_pos < size; Curr_pos++)
+		for (Curr_pos = 0; Curr_pos < size; Curr_pos++)
 		{
 			if (pRecs[Curr_pos] != Empty && pRecs[Curr_pos] != Del)
 				break;
@@ -41,18 +62,11 @@ public:
 	}
 	bool IsEnd()
 	{
-		if (Curr_pos == dataCount)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return Curr_pos == size-1;
 	}
 	void GoNext()
 	{
-		for (; Curr_pos < size; Curr_pos++)
+		for (Curr_pos++; Curr_pos < size; Curr_pos++)
 		{
 			if (pRecs[Curr_pos] != Empty && pRecs[Curr_pos] != Del)
 				break;
@@ -62,7 +76,7 @@ public:
 
 	bool Find(TKey key)
 	{
-		Free_pos = -1;
+		//Free_pos = -1;
 		Curr_pos = HashFunc(key) % size;
 		for (int t = 0; t < size; t++)
 		{
@@ -77,6 +91,7 @@ public:
 			}
 			if (pRecs[Curr_pos] == Empty)
 			{
+				Free_pos = Curr_pos;
 				return false;
 			}
 			Curr_pos = (Curr_pos + step) % size;
@@ -108,6 +123,7 @@ public:
 			}
 			pRecs[Curr_pos] = rec;
 			dataCount++;
+			efficiency++;
 		}
 		return true;
 	}

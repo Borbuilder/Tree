@@ -17,10 +17,21 @@ public:
 		}
 		size = _size;
 		pList = new std::list<TRecord>[size];
+		dataCount = 0;
+	}
+    
+	TListHash& operator =(const TListHash& other)
+	{
+		delete[] pList;
+		size = other.size;
+		pList = new std::list<TRecord>[size];
+		dataCount = other.dataCount;
+		return *this;
 	}
 	~TListHash()
 	{
 		delete[] pList;
+		dataCount = 0;
 	}
 
 	bool Find(TKey _key)
@@ -44,6 +55,7 @@ public:
 		{
 			pList[CurrList].push_front(record);
 			dataCount++;
+			efficiency++;
 		}
 		return true;
 	}
@@ -93,13 +105,14 @@ public:
 			}
 			else
 			{
+				int i = 0;
 				break;
 			}
 		}
 	}
 	bool IsEnd()
 	{
-		return CurrList == size-1;
+		return CurrList == size;
 	}
 
 	int GetSize() { return size; }

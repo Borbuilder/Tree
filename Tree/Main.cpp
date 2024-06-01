@@ -1,20 +1,16 @@
-#include "TScanTable.h"
-#include"TTable.h"
-#include"TTreeTable.h"
-#include<iostream>
-
-
-
+#include <cstdlib>
+#include<time.h>
+#include "AVLTree.h"
+#include "TTable.h"
+#include  <string>
 
 int main()
 {
-	
-	TTreeTable tree;
-	TRecord rec1(1, "1");
-	TRecord rec2(2, "2");
-	TRecord rec3(3, "3");
-	tree.Insert(rec1);
-	tree.Insert(rec2);
-	tree.Insert(rec3);
-	tree.PrintTable('file.txt',*tree);
+	AVLTree t;
+	srand(time(NULL));
+	for (int i = 0; i < 400; i++) {
+		int r = rand() % 11171;
+		TRecord rec(r, std::to_string(rand() % 171));
+		t.Insert(rec);
+	}
 }

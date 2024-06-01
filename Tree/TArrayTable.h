@@ -20,6 +20,7 @@ public:
 		this->size = _size;
 		arr = new TRecord[size];
 		currentPos = 0;
+		dataCount = 0;
 	};
 	TArrayTable(const TArrayTable& other) 
 	{ 
@@ -33,7 +34,25 @@ public:
 		}
 		currentPos = other.currentPos;
 	}
-	~TArrayTable() { delete[] arr; }
+	TArrayTable& operator=(const TArrayTable& other)
+	{
+		delete[] arr;
+		dataCount = other.dataCount;
+		efficiency = other.efficiency;
+		size = other.size;
+		arr = new TRecord[size];
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = other.arr[i];
+		}
+		currentPos = other.currentPos;
+		return *this;
+	}
+	~TArrayTable() { 
+		delete[] arr; 
+		currentPos = 0;
+		dataCount = 0;
+	}
 
 	bool IsFull() const override { return dataCount == size; }
 

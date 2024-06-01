@@ -42,6 +42,17 @@ public:
 		dataCount = 0;
 	}
 
+	TTreeTable& operator =(const TTreeTable& other)
+	{
+		DeleteTreeTab(pRoot);
+		pRoot = other.pRoot;
+		pCurr = other.pCurr;
+		pPrev = other.pPrev;
+		countpos = 0; lvl = 0;
+		dataCount = 0;
+		return *this;
+	}
+
 	bool Find(TKey key)
 	{
 		if (pCurr != nullptr)
@@ -228,6 +239,11 @@ public:
 	~TTreeTable() 
 	{
 		DeleteTreeTab(pRoot);
+		pRoot = nullptr;
+		pCurr = nullptr;
+		pPrev = nullptr;
+		countpos = 0; lvl = 0;
+		dataCount = 0;
 	}
 
 	void PrintTable(std::ostream& os, TTreeNode* pNode)

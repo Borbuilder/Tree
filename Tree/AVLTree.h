@@ -17,14 +17,14 @@ protected:
 		case BalLeft:
 			TTreeNode *p1, *p2;
 			p1 = pNode->pLeft;
-			if (p1->bal == BalLeft)
+			if (pNode->bal == BalLeft)
 			{
 				pNode->pLeft = p1->pRight;
 				p1->pRight = pNode;
 				pNode->bal = BalOK;
 				pNode = p1;
 				pNode->bal = BalOK;
-				//p1 = pNode->pLeft;
+				p1 = pNode->pLeft;
 			}
 			else
 			{
@@ -33,7 +33,7 @@ protected:
 				pNode->pLeft = p2->pRight;
 				p2->pLeft = p1;
 				p2->pRight = pNode;
-				if (p2->bal = BalRight)
+				if (p2->bal == BalRight)
 				{
 					p1->bal = BalLeft;
 					pNode->bal = BalOK;
@@ -71,13 +71,14 @@ protected:
 		case BalRight:
 			TTreeNode* p1, * p2;
 			p1 = pNode->pRight;
-			if (p1->bal == BalRight)
+			if (pNode->bal == BalRight)
 			{
 				pNode->pRight = p1->pLeft;
 				p1->pLeft = pNode;
 				pNode->bal = BalOK;
 				pNode = p1;
 				pNode->bal = BalOK;
+				p1 = pNode->pRight;
 			}
 			else
 			{
