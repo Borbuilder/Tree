@@ -13,7 +13,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-
+#include <fstream>
 TScanTable scan_table;
 		TSortTable sort_table;
 		TArrayHash array_hash;
@@ -713,6 +713,9 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		label7->Text = strange_str;
 		tree_table.ClearEfficiency();
 		flag_tree = 1;
+		std::ofstream file("output.txt"); // Открываем файл для записи
+		tree_table.PrintTable(file, tree_table.getRoot()); // Выводим содержимое дерева в файл
+		file.close(); // Закрываем файл
 	}
 
 	//Таблица на сбалансированном дереве
@@ -736,6 +739,9 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		label7->Text = strange_str;
 		avl_tree.ClearEfficiency();
 		flag_avl = 1;
+		std::ofstream file2("output.txt"); // Открываем файл для записи
+		avl_tree.PrintTable(file2, avl_tree.getRoot()); // Выводим содержимое дерева в файл
+		file2.close(); // Закрываем файл
 	}
 
 	if (flag_scan == 1) {
@@ -866,11 +872,11 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	std::string str;
 	if (is_find)
 	{
-		str = "Зпись найдена";
+		str = "Запись найдена";
 		label4->Text = gcnew String(str.c_str());
 	}
 	else {
-		str = "Зпись не найдена";
+		str = "Запись не найдена";
 		label4->Text = gcnew String(str.c_str());
 	}
 }
@@ -927,6 +933,9 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 		String^ strange_str = gcnew String(str.c_str());
 		label7->Text = strange_str;
 		tree_table.ClearEfficiency();
+		std::ofstream file3("output.txt"); // Открываем файл для записи
+		tree_table.PrintTable(file3, tree_table.getRoot()); // Выводим содержимое дерева в файл
+		file3.close(); // Закрываем файл
 	}
 	if (flag_avl == 1) {
 		avl_tree.ClearEfficiency();
@@ -936,6 +945,9 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 		String^ strange_str = gcnew String(str.c_str());
 		label7->Text = strange_str;
 		avl_tree.ClearEfficiency();
+		std::ofstream file4("output.txt"); // Открываем файл для записи
+		avl_tree.PrintTable(file4, avl_tree.getRoot()); // Выводим содержимое дерева в файл
+		file4.close(); // Закрываем файл
 	}
 
 	std::string str;
@@ -958,11 +970,11 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 				
 			}
 		}
-		str = "Зпись удалена";
+		str = "Запись удалена";
 		label4->Text = gcnew String(str.c_str());
 	}
 	else {
-		str = "Зписи не существует";
+		str = "Записи не существует";
 		label4->Text = gcnew String(str.c_str());
 	}
 }
@@ -1019,6 +1031,9 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		String^ strange_str = gcnew String(str.c_str());
 		label7->Text = strange_str;
 		tree_table.ClearEfficiency();
+		std::ofstream file5("output.txt"); // Открываем файл для записи
+		tree_table.PrintTable(file5, tree_table.getRoot()); // Выводим содержимое дерева в файл
+		file5.close(); // Закрываем файл
 	}
 	if (flag_avl == 1) {
 		avl_tree.ClearEfficiency();
@@ -1028,6 +1043,9 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		String^ strange_str = gcnew String(str.c_str());
 		label7->Text = strange_str;
 		avl_tree.ClearEfficiency();
+		std::ofstream file6("output.txt"); // Открываем файл для записи
+		avl_tree.PrintTable(file6, avl_tree.getRoot()); // Выводим содержимое дерева в файл
+		file6.close(); // Закрываем файл
 	}
 
 	std::string str;
@@ -1118,11 +1136,11 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 				i++;
 			}
 		}
-		str = "Зпись добавлена";
+		str = "Запись добавлена";
 		label4->Text = gcnew String(str.c_str());
 	}
 	else {
-		str = "Зписи уже существует";
+		str = "Записи уже существует";
 		label4->Text = gcnew String(str.c_str());
 	}
 }
