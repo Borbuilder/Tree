@@ -52,6 +52,10 @@ public:
 		dataCount = 0;
 		return *this;
 	}
+	TTreeNode* getRoot()
+	{
+		return pRoot;
+	}
 
 	bool Find(TKey key)
 	{
