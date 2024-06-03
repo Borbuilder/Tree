@@ -62,7 +62,7 @@ public:
 	}
 	bool IsEnd()
 	{
-		return Curr_pos == size-1;
+		return Curr_pos == size;
 	}
 	void GoNext()
 	{
@@ -76,7 +76,7 @@ public:
 
 	bool Find(TKey key)
 	{
-		//Free_pos = -1;
+		Free_pos = -1;
 		Curr_pos = HashFunc(key) % size;
 		for (int t = 0; t < size; t++)
 		{
@@ -85,13 +85,13 @@ public:
 			{
 				return true;
 			}
-			if (pRecs[Curr_pos] == Del && Free_pos == -1)
+			if (pRecs[Curr_pos].key == Del.key && Free_pos == -1)
 			{
 				Free_pos = Curr_pos;
 			}
-			if (pRecs[Curr_pos] == Empty)
+			if (pRecs[Curr_pos].key == Empty.key)
 			{
-				Free_pos = Curr_pos;
+				//Free_pos = Curr_pos;
 				return false;
 			}
 			Curr_pos = (Curr_pos + step) % size;

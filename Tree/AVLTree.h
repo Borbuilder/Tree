@@ -24,7 +24,7 @@ protected:
 				pNode->bal = BalOK;
 				pNode = p1;
 				pNode->bal = BalOK;
-				p1 = pNode->pLeft;
+				//p1 = pNode->pLeft;
 			}
 			else
 			{
@@ -44,8 +44,9 @@ protected:
 					pNode->bal = BalRight;
 				}
 				pNode = p2; pNode->bal = BalOK;
-				res = H_OK;
+				//res = H_OK;
 			}
+			res = H_OK;
 			break;
 
 
@@ -78,7 +79,7 @@ protected:
 				pNode->bal = BalOK;
 				pNode = p1;
 				pNode->bal = BalOK;
-				p1 = pNode->pRight;
+				//p1 = pNode->pRight;
 			}
 			else
 			{
@@ -87,20 +88,21 @@ protected:
 				pNode->pRight = p2->pLeft;
 				p2->pRight = p1;
 				p2->pLeft = pNode;
-				if (p2->bal == BalLeft)
+				if (p2->bal == BalRight)
 				{
-					p1->bal = BalRight;
+					p1->bal = BalLeft;
 					pNode->bal = BalOK;
 				}
 				else
 				{
 					p1->bal = BalOK;
-					pNode->bal = BalLeft;
+					pNode->bal = BalRight;
 				}
 				pNode = p2;
 				pNode->bal = BalOK;
-				res = H_OK;
+
 			}
+			res = H_OK;
 			break;
 		default:
 			break;
