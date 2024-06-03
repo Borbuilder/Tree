@@ -72,6 +72,7 @@ public:
 		{
 			pList[CurrList].erase(pCurr);
 			dataCount--;
+			efficiency++;
 		}
 		return true;
 	}

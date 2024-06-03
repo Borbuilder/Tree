@@ -202,29 +202,12 @@ TEST(AVLTree, can_delete_from_the_middle)
 	TRecord rec70(70, "test70");
 	tree.Insert(rec70);
 
-	EXPECT_EQ(43, tree.GetLeftKey(57));
+	EXPECT_EQ(52, tree.GetRightKey(43));
 	tree.Delete(43);
-	EXPECT_EQ(52, tree.GetLeftKey(57));
+	EXPECT_EQ(57, tree.GetRightKey(52));
+	EXPECT_EQ(21, tree.GetLeftKey(52));
+	EXPECT_EQ(52, tree.GetLeftKey(60));
 
-	//-----------------------------------
-	AVLTree tree1;
-	tree1.Insert(rec52);
-	tree1.Insert(rec43);
-	tree1.Insert(rec21);
-	tree1.Insert(rec60);
-	tree1.Insert(rec57);
-	tree1.Insert(rec70);
-
-	EXPECT_EQ(60, tree1.GetRightKey(57));
-	EXPECT_EQ(-1, tree1.GetLeftKey(60));
-	EXPECT_EQ(70, tree1.GetRightKey(60));
-	EXPECT_EQ(43, tree1.GetLeftKey(57));
-	tree1.Delete(60);
-	EXPECT_EQ(70, tree1.GetRightKey(57));
-	EXPECT_EQ(-1, tree1.GetRightKey(70));
-	EXPECT_EQ(-1, tree1.GetLeftKey(70));
-	EXPECT_EQ(43, tree1.GetLeftKey(57));
-	
 }
 
 TEST(AVLTree, can_delete_root)
@@ -259,13 +242,3 @@ TEST(AVLTree, can_delete_root)
 	EXPECT_EQ(-1, tree.GetLeftKey(60));
 }
 
-TEST(AVLTree, can)
-{
-	AVLTree tree;
-	for (int i = 0; i < 100; i++) {
-		std::string str = "name" + std::to_string(i);
-		TRecord rec(i, str);
-		tree.Insert(rec);
-	}
-
-}

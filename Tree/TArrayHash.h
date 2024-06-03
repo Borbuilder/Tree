@@ -140,6 +140,7 @@ public:
 		{
 			pRecs[Curr_pos] = Del;
 			dataCount--;
+			efficiency++;
 		}
 		return true;
 	}
