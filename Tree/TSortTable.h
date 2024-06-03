@@ -84,6 +84,7 @@ inline void TSortTable::BubbleSort()
 			{
 				std::swap(this->arr[i], this->arr[j]);
 			}
+			this->efficiency++;
 		}
 	}
 }
@@ -121,6 +122,7 @@ inline void TSortTable::Merge(int left, int mid, int right)
 			mas2[k] = this->arr[j];
 			k++; j++;
 		}
+		this->efficiency++;
 	}
 
 	if (i > mid)
@@ -195,7 +197,6 @@ inline bool TSortTable::Insert(TRecord record)
 	}
 
 	this->arr[currentPos] = record;
-	efficiency++;
 	this->dataCount++;
 	return true;
 }
